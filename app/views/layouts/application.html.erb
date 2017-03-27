@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChilabApps</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+
+  <body>
+
+
+  <!-- Uses a header that scrolls with the text, rather than staying
+  locked at the top -->
+  <div class="mdl-layout mdl-js-layout">
+    <%= render 'layouts/header' %>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <%= yield %>
+      </div>
+    </main>
+  </div>
+
+
+  </body>
+</html>
+
+
