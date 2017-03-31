@@ -1,8 +1,19 @@
-<button id="show-dialog" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Setup</button>
-<span data-bind="with: conversation">
-  <button id="start-conversation" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored start-stop"
-          data-bind="click: toggleConversation, text: startStop, css: {'mdl-color--red-700': startStop() == 'Stop', 'mdl-color--green-700': startStop() == 'Start' }, enable: $parent.selectedTopic()"></button>
-</span>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--1-offset mdl-cell--2-col">
+    <button id="show-dialog" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored setup-btn">Setup</button>
+  </div>
+  <div class="mdl-cell mdl-cell--2-col" data-bind="with: conversation">
+    <button id="start-conversation" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored start-stop-btn"
+            data-bind="click: toggleConversation, text: startStop, css: {'mdl-color--red-700': startStop() == 'Stop', 'mdl-color--green-700': startStop() == 'Start' }, enable: $parent.selectedTopic()">
+    </button>
+  </div>
+  <div class="mdl-cell mdl-cell--6-col">
+    <div data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
+      Topic: <span data-bind="text: selectedTopic() ? selectedTopic().name: 'unknown' "></span>.
+    </div>
+  </div>
+</div>
+
 
 
 <dialog class="mdl-dialog">
@@ -17,10 +28,6 @@
                        optionsText: 'name',
                        value: selectedTopic,
                        optionsCaption: 'Choose...'"></select>
-    <div data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
-      You have selected this topic:
-      <span data-bind="text: selectedTopic() ? selectedTopic().name: 'unknown' "></span>.
-    </div>
     </p>
 
 

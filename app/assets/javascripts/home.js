@@ -59,6 +59,7 @@ $(function () {
                 var resultingWord = matchWords(lastSentence);
                 console.log(resultingWord, lastSentence);
                 if (resultingWord) {
+                    $parent.showWord(resultingWord);
                     var date = new Date(event.timeStamp);
                     dataItem.word = resultingWord || "";
                     dataItem.sentence = lastSentence;
@@ -116,7 +117,6 @@ $(function () {
     var SmartConversation = function () {
         var self = this;
 
-
         self.topics = ko.observableArray([]);
         self.selectedTopic = ko.observable();
         setupTopics(self);
@@ -129,6 +129,17 @@ $(function () {
         self.transcript = ko.observableArray([]);
 
         self.conversation = ko.observable(getCoversation(self));
+
+
+        self.showWord = function (word) {
+            var snackbarContainer = document.querySelector('#word-toast'),
+                data = {
+                    message: word,
+                    timeout: self.timeout() * 1000
+                };
+            console.log(self.timeout());
+            snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        };
 
     };
 

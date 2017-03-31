@@ -5,11 +5,23 @@
   }
 }
 
-
 .mdl-dialog {
   width: 800px;
 }
 
-.start-stop {
-  width: 80px;
+.start-stop-btn, .setup-btn {
+  width: 100%;
+}
+.mdl-snackbar {
+  left: auto;
+  right: 0px;
+  top: 0;
+  bottom: auto;
+  transform: translate(-50%,-40px);
+}
+.mdl-snackbar--active {
+  transform: translate(-50%, 100px);
+}
+.mdl-snackbar__text {
+  margin: auto;
 }
