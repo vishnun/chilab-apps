@@ -1,0 +1,36 @@
+<button id="show-dialog" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Setup</button>
+<span data-bind="with: conversation">
+  <button id="start-conversation" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored start-stop"
+          data-bind="click: toggleConversation, text: startStop, css: {'mdl-color--red-700': startStop() == 'Stop', 'mdl-color--green-700': startStop() == 'Start' }, enable: $parent.selectedTopic()"></button>
+</span>
+
+
+<dialog class="mdl-dialog">
+  <h4 class="mdl-dialog__title">Speech recognition setup</h4>
+  <div class="mdl-dialog__content mdl-typography--text-left">
+
+    <p>
+
+      Topic:
+      <select class="custom-select"
+              data-bind="options: topics,
+                       optionsText: 'name',
+                       value: selectedTopic,
+                       optionsCaption: 'Choose...'"></select>
+    <div data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
+      You have selected this topic:
+      <span data-bind="text: selectedTopic() ? selectedTopic().name: 'unknown' "></span>.
+    </div>
+    </p>
+
+
+    <p>
+      Timeout:
+      <input class="" type="number" id="timeout" data-bind="value: timeout"> secs
+    </p>
+
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button close">Done</button>
+  </div>
+</dialog>

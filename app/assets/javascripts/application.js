@@ -13,4 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require knockout
+//= require knockout.mapping
+//= require data/topics
 //= require_tree .

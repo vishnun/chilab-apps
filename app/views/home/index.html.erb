@@ -1,24 +1,12 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--3-offset-desktop mdl-cell--6-col mdl-cell--12-col-tablet mdl-typography--text-center">
-    <button id="show-dialog" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Setup</button>
-    <dialog class="mdl-dialog">
-      <h4 class="mdl-dialog__title">Speech recognition setup</h4>
-      <div class="mdl-dialog__content">
-        <p>
-          This is where you set the speech recognition stuff.
-        </p>
-      </div>
-      <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button">Done</button>
-        <button type="button" class="mdl-button close">close</button>
-      </div>
-    </dialog>
+    <%= render 'smart_conversation_setup' %>
   </div>
-
 
   <div class="mdl-cell mdl-cell--3-offset-desktop mdl-cell--6-col mdl-cell--12-col-tablet document">
     <embed class="align-center" src='documents/prob1.pdf' width="800px" height="1100px"></embed>
   </div>
+
 
 
 </div>
