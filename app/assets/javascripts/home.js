@@ -114,6 +114,7 @@ $(function () {
         }
     }
 
+
     var SmartConversation = function () {
         var self = this;
 
@@ -130,6 +131,16 @@ $(function () {
 
         self.conversation = ko.observable(getCoversation(self));
 
+
+        self.finishSetup = function () {
+            var document_url = $('#problem').find('option:selected').val();
+            var context = {url: document_url};
+            var source = $("#document-template").html();
+            var template = Handlebars.compile(source);
+            var html = template(context);
+            var $documentContainer = $('.document-container');
+            $documentContainer.html(html);
+        };
 
         self.showWord = function (word) {
             var snackbarContainer = document.querySelector('#word-toast'),

@@ -36,8 +36,22 @@
       <input class="" type="number" id="timeout" data-bind="value: timeout"> secs
     </p>
 
+    <p>
+      Problem:
+      <%= select_tag 'problem', options_from_collection_for_select(@problems, 'url', 'name') %>
+    </p>
+
+    <div>
+      <%= form_for @problem, url: problems_path, html: { multipart: true } do |form| %>
+          <%= form.file_field :document %>
+          <%= submit_tag 'Submit' %>
+      <% end %>
+    </div>
+
   </div>
   <div class="mdl-dialog__actions">
-    <button type="button" class="mdl-button close">Done</button>
+    <button type="button" class="mdl-button close" data-bind="click: finishSetup">Done</button>
   </div>
 </dialog>
+
+

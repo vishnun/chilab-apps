@@ -3,16 +3,19 @@
     <%= render 'smart_conversation_setup' %>
   </div>
 
-  <div class="mdl-cell mdl-cell--3-offset-desktop mdl-cell--6-col mdl-cell--12-col-tablet document">
-    <embed class="align-center" src='documents/prob1.pdf' width="800px" height="1100px"></embed>
+  <div class="mdl-cell mdl-cell--3-offset-desktop mdl-cell--6-col mdl-cell--12-col-tablet document-container">
   </div>
-
 
   <div id="word-toast" class="mdl-js-snackbar mdl-snackbar">
     <div class="mdl-snackbar__text"></div>
     <button class="mdl-snackbar__action" type="button"></button>
   </div>
 
-
-
 </div>
+
+
+
+
+<script id="document-template" type="text/x-handlebars-template">
+  <embed class="align-center" src="{{url}}" width="800px" height="1100px"></embed>
+</script>
