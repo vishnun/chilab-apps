@@ -15,5 +15,13 @@ window.lcl.topics = {
         'scientific', 'rigorous', 'method', 'methodology', 'experiment', 'controlled', 'anecdotal', 'causal', 'correlation', 'implied', 'implies', 'imply', 'observation', 'observed', 'observes',
         'superficial', 'irrelevant', 'logic', 'logical', 'probable', 'probability', 'flawed', 'interpret', 'interpreted', 'interprets', 'generalize', 'systematic', 'inference', 'infer', 'infers',
         'support', 'supports', 'supported', 'claim', 'claims', 'conflict', 'conflicts', 'balanced', 'bias', 'credibility', 'credible', 'reliable', 'trustworthy', 'relationship', 'validity', 'valid',
-        'sound']
+        'sound'],
+    physics: ['time', 'interval', 'intervals', 'span', 'spans', 'position', 'location', 'located', 'displacement',
+        'displace', 'displaced', 'travel', 'traveling', 'distance', 'space', 'velocity', 'speed', 'speeding', 'fast',
+        'slowing', 'slow', 'acceleration', 'constant', 'uniform', 'changing', 'increasing', 'decreasing', 'change', 'changes', 'delta',
+        'linear', 'flat', 'line', 'straight', 'exponential', 'curved', 'curve', 'shape', 'shaped', 'positive', 'negative', 'zero', 'non-zero',
+        'axis', 'axes', 'vertical', 'horizontal', 'representation', 'representation', 'represent', 'represents', 'derivative', 'rate', 'rates',
+        'slope', 'ratio', 'point', 'points', 'function', 'functions', 'equation', 'magnitude', 'strength', 'vector', 'vectors']
 };
+
+

@@ -1,22 +1,30 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--2-col">
-    <button id="show-dialog" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored setup-btn">Setup</button>
+    <button id="show-setup-dialog" type="button" data-bind="click: showSetupDialog"
+            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored setup-btn">
+      Setup
+    </button>
   </div>
   <div class="mdl-cell mdl-cell--2-col" data-bind="with: conversation">
     <button id="start-conversation" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored start-stop-btn"
             data-bind="click: toggleConversation, text: startStop, css: {'mdl-color--red-700': startStop() == 'Stop', 'mdl-color--green-700': startStop() == 'Start' }, enable: $parent.selectedTopic()">
     </button>
   </div>
-  <div class="mdl-cell mdl-cell--6-col">
-    <div class="mdl-typography--display-1 mdl-typography--text-right" data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
+  <div class="mdl-cell mdl-cell--5-col">
+    <div class="mdl-typography--headline mdl-typography--text-left" data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
       Topic: <span data-bind="text: selectedTopic() ? selectedTopic().name: 'unknown' "></span>.
     </div>
+  </div>
+  <div class="mdl-cell mdl-cell--3-col">
+    <button id="show-transcript"  data-bind="click: showTranscriptDialog"
+            class="mdl-button mdl-js-button mdl-button--accent">
+      Show Transcript
+    </button>
   </div>
 </div>
 
 
-
-<dialog class="mdl-dialog">
+<dialog class="mdl-dialog" id="setup-dialog">
   <h4 class="mdl-dialog__title mdl-typography--text-center">Speech recognition setup</h4>
   <div class="mdl-dialog__content mdl-typography--text-left">
 
@@ -60,7 +68,9 @@
 
   </div>
   <div class="mdl-dialog__actions">
-    <button type="button" class="mdl-button close" data-bind="click: finishSetup">Done</button>
+    <button type="button" class="mdl-button close" data-bind="click: finishSetup">
+      Done
+    </button>
   </div>
 </dialog>
 

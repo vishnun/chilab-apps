@@ -1,16 +1,4 @@
 $(function () {
-    var dialog = document.querySelector('dialog');
-    var showDialogButton = document.querySelector('#show-dialog');
-    if (!dialog.showModal) {
-        dialogPolyfill.registerDialog(dialog);
-    }
-    showDialogButton.addEventListener('click', function () {
-        dialog.showModal();
-    });
-    dialog.querySelector('.close').addEventListener('click', function () {
-        dialog.close();
-    });
-
     var getCoversation = function ($parent) {
         var self = this;
         var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -179,8 +167,33 @@ $(function () {
         $documentContainer.html(html);
     }
 
+    function setupDialogs(dialogs) {
+        dialogs.forEach(function (dialog) {
+            if (!dialog.showModal) {
+                dialogPolyfill.registerDialog(dialog);
+            }
+
+            dialog.querySelector('.close').addEventListener('click', function () {
+                dialog.close();
+            });
+        });
+
+    }
+
     var SmartConversation = function () {
         var self = this;
+
+        var setupDialog = document.querySelector('dialog#setup-dialog');
+        var transcriptDialog = document.querySelector('dialog#transcript-dialog');
+        setupDialogs([setupDialog, transcriptDialog]);
+
+        self.showSetupDialog = function () {
+            setupDialog.showModal();
+        };
+
+        self.showTranscriptDialog = function () {
+            transcriptDialog.showModal();
+        };
 
         self.topics = ko.observableArray([]);
         setupTopics(self);
