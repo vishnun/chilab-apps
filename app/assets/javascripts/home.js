@@ -19,13 +19,20 @@ $(function () {
         var speechRecognitionList = new SpeechGrammarList();
         var recognition = new SpeechRecognition();
         recognition.continuous = true;
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 1;
+        // recognition.interimResults = false;
+        // recognition.maxAlternatives = 1;
         self.started = false;
         self.timeoutObj = null;
 
         self.startStop = ko.observable('Start');
 
+        self.restart = function () {
+            console.log("restarting...");
+            self.stopRecognition();
+            setTimeout(function () {
+                self.startRecognition();
+            }, 1000);
+        };
 
         self.startRecognition = function () {
             recognition.lang = $parent.selectedLanguage().name;
@@ -33,9 +40,11 @@ $(function () {
         };
 
         self.stopRecognition = function () {
+            if (self.started == false) {
+                clearTimeout(this.timeoutObj);
+            }
             recognition.stop();
         };
-
 
         var matchWords = function (sentence) {
             var words = $parent.selectedTopic().words;
@@ -74,6 +83,30 @@ $(function () {
             processResult(event);
         };
 
+        recognition.onend = function () {
+            console.log('Speech recognition service disconnected');
+        };
+
+        recognition.onaudiostart = function () {
+            console.log('Audio capturing started');
+        };
+        recognition.onaudioend = function () {
+            console.log('Audio capturing ended');
+        };
+
+        recognition.onspeechend = function () {
+            console.log('Speech has stopped being detected');
+            self.restart();
+        };
+
+        recognition.onerror = function (event) {
+            console.log('Speech recognition error detected: ' + event.error);
+        };
+
+        recognition.onspeechstart = function () {
+            console.log('Speech has been detected');
+        };
+
         self.toggleConversation = function () {
             if (self.started) {
                 console.log("stopping..");
@@ -82,6 +115,9 @@ $(function () {
                 self.started = false;
             } else {
                 console.log("starting..");
+                self.timeoutObj = setTimeout(function () {
+                    self.restart();
+                }, 15000);
                 self.startStop("Stop");
                 self.startRecognition();
                 self.started = true;
@@ -115,6 +151,16 @@ $(function () {
     }
 
 
+    function setupProblemDocument() {
+        var document_url = $('#problem').find('option:selected').val();
+        var context = {url: document_url};
+        var source = $("#document-template").html();
+        var template = Handlebars.compile(source);
+        var html = template(context);
+        var $documentContainer = $('.document-container');
+        $documentContainer.html(html);
+    }
+
     var SmartConversation = function () {
         var self = this;
 
@@ -133,13 +179,7 @@ $(function () {
 
 
         self.finishSetup = function () {
-            var document_url = $('#problem').find('option:selected').val();
-            var context = {url: document_url};
-            var source = $("#document-template").html();
-            var template = Handlebars.compile(source);
-            var html = template(context);
-            var $documentContainer = $('.document-container');
-            $documentContainer.html(html);
+            setupProblemDocument();
         };
 
         self.showWord = function (word) {
