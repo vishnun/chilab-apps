@@ -18,11 +18,15 @@ $(function () {
         var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
         var speechRecognitionList = new SpeechGrammarList();
         var recognition = new SpeechRecognition();
+
         recognition.continuous = true;
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
         // recognition.interimResults = false;
         // recognition.maxAlternatives = 1;
         self.started = false;
         self.timeoutObj = null;
+        self.restartTimeoutObj = null;
 
         self.startStop = ko.observable('Start');
 
@@ -36,13 +40,17 @@ $(function () {
 
         self.startRecognition = function () {
             recognition.lang = $parent.selectedLanguage().name;
+            self.started = true;
             recognition.start();
+            self.timeoutObj = setTimeout(function () {
+                self.restart();
+            }, 15000);
         };
 
         self.stopRecognition = function () {
-            if (self.started == false) {
-                clearTimeout(this.timeoutObj);
-            }
+            console.log("Stopping now..");
+            self.started = false;
+            clearTimeout(self.timeoutObj);
             recognition.stop();
         };
 
@@ -85,6 +93,10 @@ $(function () {
 
         recognition.onend = function () {
             console.log('Speech recognition service disconnected');
+            if (self.started) {
+                console.log("connecting again..");
+                self.restart();
+            }
         };
 
         recognition.onaudiostart = function () {
@@ -92,15 +104,26 @@ $(function () {
         };
         recognition.onaudioend = function () {
             console.log('Audio capturing ended');
+            if (self.started) {
+                console.log("connecting again..");
+                self.restart();
+            }
         };
 
         recognition.onspeechend = function () {
             console.log('Speech has stopped being detected');
-            self.restart();
+            if (self.started) {
+                console.log("connecting again..");
+                self.restart();
+            }
         };
 
         recognition.onerror = function (event) {
             console.log('Speech recognition error detected: ' + event.error);
+            if (self.started) {
+                console.log("connecting again..");
+                self.restart();
+            }
         };
 
         recognition.onspeechstart = function () {
@@ -112,15 +135,10 @@ $(function () {
                 console.log("stopping..");
                 self.startStop("Start");
                 self.stopRecognition();
-                self.started = false;
             } else {
                 console.log("starting..");
-                self.timeoutObj = setTimeout(function () {
-                    self.restart();
-                }, 15000);
                 self.startStop("Stop");
                 self.startRecognition();
-                self.started = true;
             }
         };
 
@@ -165,8 +183,8 @@ $(function () {
         var self = this;
 
         self.topics = ko.observableArray([]);
-        self.selectedTopic = ko.observable();
         setupTopics(self);
+        self.selectedTopic = ko.observable(self.topics()[1]);
 
         var defaultLanguage = new Language('en-US');
         self.languages = ko.observableArray([defaultLanguage, new Language('en-GB'), new Language('en-IN'), new Language('en-CA'), new Language('en-AU'), new Language('en-NZ'), new Language('en-ZA')]);
