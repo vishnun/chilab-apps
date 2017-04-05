@@ -1,5 +1,5 @@
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--1-offset mdl-cell--2-col">
+  <div class="mdl-cell mdl-cell--2-col">
     <button id="show-dialog" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored setup-btn">Setup</button>
   </div>
   <div class="mdl-cell mdl-cell--2-col" data-bind="with: conversation">
@@ -8,7 +8,7 @@
     </button>
   </div>
   <div class="mdl-cell mdl-cell--6-col">
-    <div data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
+    <div class="mdl-typography--display-1 mdl-typography--text-right" data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
       Topic: <span data-bind="text: selectedTopic() ? selectedTopic().name: 'unknown' "></span>.
     </div>
   </div>
@@ -17,36 +17,46 @@
 
 
 <dialog class="mdl-dialog">
-  <h4 class="mdl-dialog__title">Speech recognition setup</h4>
+  <h4 class="mdl-dialog__title mdl-typography--text-center">Speech recognition setup</h4>
   <div class="mdl-dialog__content mdl-typography--text-left">
 
-    <p>
 
-      Topic:
-      <select class="custom-select"
-              data-bind="options: topics,
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+      <div class="mdl-tabs__tab-bar">
+        <a href="#conversation-panel" class="mdl-tabs__tab is-active">Conversation</a>
+        <a href="#upload-panel" class="mdl-tabs__tab">Setup</a>
+      </div>
+
+      <div class="mdl-tabs__panel is-active" id="conversation-panel">
+        <p>
+
+          Topic:
+          <select class="custom-select"
+                  data-bind="options: topics,
                        optionsText: 'name',
                        value: selectedTopic,
                        optionsCaption: 'Choose...'"></select>
-    </p>
+        </p>
 
 
-    <p>
-      Timeout:
-      <input class="" type="number" id="timeout" data-bind="value: timeout"> secs
-    </p>
+        <p>
+          Timeout:
+          <input class="" type="number" id="timeout" data-bind="value: timeout"> secs
+        </p>
 
-    <p>
-      Problem:
-      <%= select_tag 'problem', options_from_collection_for_select(@problems, 'url', 'name') %>
-    </p>
-
-    <div>
-      <%= form_for @problem, url: problems_path, html: { multipart: true } do |form| %>
-          <%= form.file_field :document %>
-          <%= submit_tag 'Submit' %>
-      <% end %>
+        <p>
+          Problem:
+          <%= select_tag 'problem', options_from_collection_for_select(@problems, 'url', 'name') %>
+        </p>
+      </div>
+      <div class="mdl-tabs__panel" id="upload-panel">
+        <%= form_for @problem, url: problems_path, html: {multipart: true} do |form| %>
+            <%= form.file_field :document %>
+            <%= submit_tag 'Submit' %>
+        <% end %>
+      </div>
     </div>
+
 
   </div>
   <div class="mdl-dialog__actions">
