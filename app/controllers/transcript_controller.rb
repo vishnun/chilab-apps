@@ -32,6 +32,6 @@ class TranscriptController < ApplicationController
   end
 
   def dialogue_params
-    params.require(:dialogue).permit(:transcript_id, :user, :sentence)
+    params.require(:dialogue).permit(:transcript_id, :user, :sentence, :word_detected)
   end
 end

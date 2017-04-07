@@ -45,9 +45,10 @@ $(function () {
         this.name = name;
     };
 
-    var Dialogue = function (user, sentence) {
+    var Dialogue = function (user, sentence, wordDetected) {
         this.user = user;
         this.sentence = sentence;
+        this.wordDetected = wordDetected;
     };
 
     var SmartConversation = function () {
@@ -68,7 +69,7 @@ $(function () {
             }).done(function (data) {
                 data.forEach(function (d) {
                     console.log(d.user, d.sentence);
-                    self.dialogues.push(new Dialogue(d.user, d.sentence));
+                    self.dialogues.push(new Dialogue(d.user, d.sentence, d.word_detected));
                 });
             });
         }
@@ -100,7 +101,7 @@ $(function () {
 
         self.selectedTranscriptId = ko.observable();
 
-        self.post_dialogue = function (sentence) {
+        self.post_dialogue = function (sentence, wordDetected) {
             var $transcriptEl = $('#transcript');
             var selected = $transcriptEl.find('option:selected');
 
@@ -111,7 +112,8 @@ $(function () {
                     dialogue: {
                         transcript_id: selected.val(),
                         user: self.selectedUser().name,
-                        sentence: sentence
+                        sentence: sentence,
+                        word_detected: wordDetected
                     }
                 }
             })

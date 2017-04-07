@@ -7,7 +7,11 @@
         <span class="mdl-list__item-primary-content">
           <i class="material-icons mdl-list__item-avatar">person</i>
           <span data-bind="text: user"></span>
-          <span data-bind="text: sentence" class="mdl-list__item-text-body">
+          <span class="mdl-list__item-text-body">
+            <span data-bind="text: sentence"></span>
+            (<span data-bind="visible: wordDetected != 'false', text: wordDetected"></span>)
+          </span>
+
           </span>
         </span>
       </li>

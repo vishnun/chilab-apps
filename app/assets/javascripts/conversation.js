@@ -61,7 +61,7 @@ var getCoversation = function ($parent) {
             // view.checkWords(lastSentence);
             // view.addToTranscript(lastSentence);
             var resultingWord = matchWords(lastSentence);
-            $parent.post_dialogue(lastSentence);
+            $parent.post_dialogue(lastSentence, resultingWord);
             console.log(resultingWord, lastSentence);
             if (resultingWord) {
                 $parent.showWord(resultingWord);
