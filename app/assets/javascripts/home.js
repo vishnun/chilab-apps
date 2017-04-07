@@ -76,6 +76,23 @@ $(function () {
             setupProblemDocument();
         };
 
+        self.post_dialogue = function (sentence) {
+            var $transcriptEl = $('#transcript');
+            var selected = $transcriptEl.find('option:selected');
+
+            $.ajax({
+                url: "/dialogue",
+                method: 'post',
+                data: {
+                    dialogue: {
+                        transcript_id: selected.val(),
+                        user: self.selectedUser().name,
+                        sentence: sentence
+                    }
+                }
+            })
+        };
+
         self.showWord = function (word) {
             var snackbarContainer = document.querySelector('#word-toast'),
                 data = {
