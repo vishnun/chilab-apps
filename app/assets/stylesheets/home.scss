@@ -1,18 +1,19 @@
-.document-container {
-  display: flex;
-  embed {
-    display: flex;
-    margin: auto;
-  }
+.container {
+  max-width: 960px;
 }
 
 .dialogue-line {
   height: auto !important;
   padding: 0;
 }
+
 .mdl-dialog {
   width: 800px;
   top: 100px;
+}
+
+.label-text {
+  color: gray;
 }
 
 #transcript-dialog {
@@ -23,16 +24,25 @@
 .start-stop-btn, .setup-btn, .show-transcript-btn {
   width: 100%;
 }
+
+.show-transcript-btn {
+  color: steelblue;
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+
 .mdl-snackbar {
   left: auto;
   right: 0px;
   top: 0;
   bottom: auto;
-  transform: translate(-50%,-40px);
+  transform: translate(-50%, -40px);
 }
+
 .mdl-snackbar--active {
   transform: translate(-50%, 100px);
 }
+
 .mdl-snackbar__text {
   margin: auto;
 }

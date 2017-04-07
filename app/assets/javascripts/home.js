@@ -13,7 +13,13 @@ $(function () {
         var topicsData = window.lcl.topics;
         for (var key in topicsData) {
             if (topicsData.hasOwnProperty(key)) {
-                self.topics.push(new Topic(key, topicsData[key]));
+
+                var wordDict = {};
+                topicsData[key].forEach(function (word) {
+                    wordDict[word] = true;
+                });
+
+                self.topics.push(new Topic(key, wordDict));
             }
         }
     }
@@ -100,7 +106,7 @@ $(function () {
 
         self.selectedTranscriptId = ko.observable();
 
-        self.post_dialogue = function (sentence, wordDetected) {
+        self.post_dialogue = function (sentence, wordsDetected) {
             var $transcriptEl = $('#transcript');
             var selected = $transcriptEl.find('option:selected');
 
@@ -112,23 +118,23 @@ $(function () {
                         transcript_id: selected.val(),
                         user: self.selectedUser().name,
                         sentence: sentence,
-                        word_detected: wordDetected
+                        word_detected: wordsDetected.join(" - ")
                     }
                 }
             })
         };
 
-        self.showWord = function (word) {
+        self.showWord = function (words) {
             var snackbarContainer = document.querySelector('#word-toast'),
                 data = {
-                    message: word,
+                    message: words.join(", "),
                     timeout: self.timeout() * 1000
                 };
-            console.log(self.timeout());
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
         };
 
         self.users = ko.observableArray([]);
+        self.selectedUser = ko.observable();
 
         self.updateUsers = function () {
             var $transcriptEl = $('#transcript');
@@ -147,10 +153,11 @@ $(function () {
                 users.forEach(function (userName) {
                     self.users.push(new User(userName));
                 });
+                self.selectedUser(self.users()[0]);
             });
         };
 
-        self.selectedUser = ko.observable();
+
         self.updateUsers();
     };
 

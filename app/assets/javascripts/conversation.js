@@ -44,33 +44,23 @@ var getCoversation = function ($parent) {
     var matchWords = function (sentence) {
         var words = $parent.selectedTopic().words;
         var wordsInSentence = sentence.toLowerCase().split(" ");
-        for (var index in words) {
-            var word = words[index];
-            if (wordsInSentence.includes(word)) {
-                return word;
+        var wordsFound = [];
+        wordsInSentence.forEach(function (word) {
+            if (words[word]) {
+                wordsFound.push(word);
             }
-        }
-        return false;
+        });
+        return wordsFound;
     };
 
     function processResult(event) {
-        var dataItem = {};
         var last = event.results.length - 1;
         var lastSentence = event.results[last][0].transcript;
         if (event.results[last].isFinal) {
-            // view.checkWords(lastSentence);
-            // view.addToTranscript(lastSentence);
-            var resultingWord = matchWords(lastSentence);
-            $parent.post_dialogue(lastSentence, resultingWord);
-            console.log(resultingWord, lastSentence);
-            if (resultingWord) {
-                $parent.showWord(resultingWord);
-                var date = new Date(event.timeStamp);
-                dataItem.word = resultingWord || "";
-                dataItem.sentence = lastSentence;
-                dataItem.date = date.toGMTString();
-                dataItem.timestamp = event.timeStamp;
-                dataItem = {};
+            var resultingWords = matchWords(lastSentence);
+            $parent.post_dialogue(lastSentence, resultingWords);
+            if (resultingWords) {
+                $parent.showWord(resultingWords);
             }
         }
     }

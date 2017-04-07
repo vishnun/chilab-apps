@@ -1,27 +1,30 @@
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--2-col">
-    <button id="show-setup-dialog" type="button" data-bind="click: function(){ showDialog('setup') }"
-            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored setup-btn">
-      Setup
-    </button>
+<div class="mdl-cell mdl-cell--2-col">
+  <button id="show-setup-dialog" type="button" data-bind="click: function(){ showDialog('setup') }"
+          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored setup-btn">
+    Setup
+  </button>
+</div>
+<div class="mdl-cell mdl-cell--2-col" data-bind="with: conversation">
+  <button id="start-conversation" type="button"
+          class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored start-stop-btn"
+          data-bind="click: toggleConversation, text: startStop, css: {'mdl-color--red-700': startStop() == 'Stop', 'mdl-color--green-700': startStop() == 'Start' }, enable: $parent.selectedTopic()">
+  </button>
+</div>
+<div class="mdl-cell mdl-cell--2-col">
+  <div class="mdl-typography--headline mdl-typography--text-left" data-bind="visible: selectedUser"> <!-- Appears when you select something -->
+    <span class="label-text">I am:</span> <span data-bind="text: selectedUser() ? selectedUser().name : 'unknown' "></span>.
   </div>
-  <div class="mdl-cell mdl-cell--2-col" data-bind="with: conversation">
-    <button id="start-conversation" type="button"
-            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored start-stop-btn"
-            data-bind="click: toggleConversation, text: startStop, css: {'mdl-color--red-700': startStop() == 'Stop', 'mdl-color--green-700': startStop() == 'Start' }, enable: $parent.selectedTopic()">
-    </button>
+</div>
+<div class="mdl-cell mdl-cell--3-col">
+  <div class="mdl-typography--headline mdl-typography--text-left" data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
+    <span class="label-text">Topic:</span> <span data-bind="text: selectedTopic() ? selectedTopic().name : 'unknown' "></span>.
   </div>
-  <div class="mdl-cell mdl-cell--5-col">
-    <div class="mdl-typography--headline mdl-typography--text-left" data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
-      Topic: <span data-bind="text: selectedTopic() ? selectedTopic().name: 'unknown' "></span>.
-    </div>
-  </div>
-  <div class="mdl-cell mdl-cell--3-col">
-    <button id="show-transcript" data-bind="click: function(){ showDialog('transcript') }"
-            class="mdl-button mdl-js-button mdl-button--accent show-transcript-btn">
-      Show Transcript
-    </button>
-  </div>
+</div>
+<div class="mdl-cell mdl-cell--3-col">
+  <button id="show-transcript" data-bind="click: function(){ showDialog('transcript') }"
+          class="mdl-button mdl-js-button show-transcript-btn">
+    Show Transcript
+  </button>
 </div>
 
 
