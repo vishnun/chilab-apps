@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407004019) do
+ActiveRecord::Schema.define(version: 20170407173953) do
 
   create_table "dialogues", force: :cascade do |t|
     t.integer  "transcript_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170407004019) do
     t.string   "sentence"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "word_detected"
     t.index ["transcript_id"], name: "index_dialogues_on_transcript_id"
   end
 
