@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404213438) do
+ActiveRecord::Schema.define(version: 20170407004019) do
+
+  create_table "dialogues", force: :cascade do |t|
+    t.integer  "transcript_id"
+    t.string   "user"
+    t.string   "sentence"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["transcript_id"], name: "index_dialogues_on_transcript_id"
+  end
 
   create_table "problems", force: :cascade do |t|
     t.datetime "created_at",            null: false
@@ -19,6 +28,14 @@ ActiveRecord::Schema.define(version: 20170404213438) do
     t.string   "document_content_type"
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
+  end
+
+  create_table "transcripts", force: :cascade do |t|
+    t.string   "name"
+    t.string   "user1"
+    t.string   "user2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
