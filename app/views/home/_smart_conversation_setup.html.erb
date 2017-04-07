@@ -6,7 +6,8 @@
     </button>
   </div>
   <div class="mdl-cell mdl-cell--2-col" data-bind="with: conversation">
-    <button id="start-conversation" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored start-stop-btn"
+    <button id="start-conversation" type="button"
+            class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored start-stop-btn"
             data-bind="click: toggleConversation, text: startStop, css: {'mdl-color--red-700': startStop() == 'Stop', 'mdl-color--green-700': startStop() == 'Start' }, enable: $parent.selectedTopic()">
     </button>
   </div>
@@ -17,7 +18,7 @@
   </div>
   <div class="mdl-cell mdl-cell--3-col">
     <button id="show-transcript" data-bind="click: function(){ showDialog('transcript') }"
-            class="mdl-button mdl-js-button mdl-button--accent">
+            class="mdl-button mdl-js-button mdl-button--accent show-transcript-btn">
       Show Transcript
     </button>
   </div>

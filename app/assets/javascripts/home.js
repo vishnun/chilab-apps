@@ -45,12 +45,33 @@ $(function () {
         this.name = name;
     };
 
+    var Dialogue = function (user, sentence) {
+        this.user = user;
+        this.sentence = sentence;
+    };
+
     var SmartConversation = function () {
         var self = this;
 
         var setupDialog = document.querySelector('dialog#setup-dialog');
         var transcriptDialog = document.querySelector('dialog#transcript-dialog');
         setupDialogs([setupDialog, transcriptDialog]);
+        self.dialogues = ko.observableArray([]);
+        function showDialogues() {
+            $.ajax({
+                url: "/dialogues",
+                data: {
+                    transcript: {
+                        id: self.selectedTranscriptId()
+                    }
+                }
+            }).done(function (data) {
+                data.forEach(function (d) {
+                    console.log(d.user, d.sentence);
+                    self.dialogues.push(new Dialogue(d.user, d.sentence));
+                });
+            });
+        }
 
         self.showDialog = function (dialogType) {
             if (dialogType == 'setup') {
@@ -58,6 +79,7 @@ $(function () {
             }
             if (dialogType == 'transcript') {
                 transcriptDialog.showModal();
+                showDialogues()
             }
         };
 
@@ -75,6 +97,8 @@ $(function () {
         self.finishSetup = function () {
             setupProblemDocument();
         };
+
+        self.selectedTranscriptId = ko.observable();
 
         self.post_dialogue = function (sentence) {
             var $transcriptEl = $('#transcript');
@@ -108,6 +132,7 @@ $(function () {
         self.updateUsers = function () {
             var $transcriptEl = $('#transcript');
             var selected = $transcriptEl.find('option:selected');
+            self.selectedTranscriptId(selected.val());
             $.ajax({
                 url: "/transcript_users",
                 context: document.body,

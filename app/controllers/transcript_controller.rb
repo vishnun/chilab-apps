@@ -13,7 +13,16 @@ class TranscriptController < ApplicationController
     render json: [transcript.user1, transcript.user2]
   end
 
+  def dialogues
+    @dialogues = Transcript.where(dialogues_params)[0].dialogues
+    render json: @dialogues
+  end
+
   private
+  def dialogues_params
+    params.require(:transcript).permit(:id)
+  end
+
   def transcript_params
     params.require(:transcript).permit(:name, :user1, :user2)
   end

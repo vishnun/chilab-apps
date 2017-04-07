@@ -2,17 +2,12 @@
   <h4 class="mdl-dialog__title mdl-typography--text-center">Transcript</h4>
   <div class="mdl-dialog__content mdl-typography--text-left">
 
-    <h6 class="mdl-typography--headline">Conversation</h6>
-
-
-    <ul class="demo-list-three mdl-list">
-      <li class="mdl-list__item mdl-list__item--three-line">
+    <ul class="demo-list-three mdl-list" data-bind="foreach: dialogues">
+      <li class="mdl-list__item mdl-list__item--three-line dialogue-line">
         <span class="mdl-list__item-primary-content">
           <i class="material-icons mdl-list__item-avatar">person</i>
-          <span>Bryan Cranston</span>
-          <span class="mdl-list__item-text-body">
-            Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-            for playing Hal in Malcom in the Middle.
+          <span data-bind="text: user"></span>
+          <span data-bind="text: sentence" class="mdl-list__item-text-body">
           </span>
         </span>
       </li>
