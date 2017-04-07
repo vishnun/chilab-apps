@@ -68,7 +68,6 @@ $(function () {
                 }
             }).done(function (data) {
                 data.forEach(function (d) {
-                    console.log(d.user, d.sentence);
                     self.dialogues.push(new Dialogue(d.user, d.sentence, d.word_detected));
                 });
             });

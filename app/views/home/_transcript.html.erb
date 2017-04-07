@@ -18,8 +18,13 @@
     </ul>
   </div>
   <div class="mdl-dialog__actions">
+
     <button type="button" class="mdl-button close" data-bind="click: finishSetup">
       Done
     </button>
+    <a class="mdl-button mdl-js-button mdl-js-ripple-effect" data-bind="attr: {href: '<%= get_dialogues_path(format: 'csv') %>?transcript[id]='+selectedTranscriptId()}">
+      <i class="material-icons">save</i>
+      save
+    </a>
   </div>
 </dialog>

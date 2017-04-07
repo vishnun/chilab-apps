@@ -14,8 +14,13 @@ class TranscriptController < ApplicationController
   end
 
   def dialogues
-    @dialogues = Transcript.where(dialogues_params)[0].dialogues
-    render json: @dialogues
+    transcript = Transcript.where(dialogues_params)[0]
+    @dialogues = transcript.dialogues
+
+    respond_to do |format|
+      format.json { render json: @dialogues, status: :ok }
+      format.csv { send_data Dialogue.to_csv(@dialogues), filename: "transcript-#{transcript.name}-#{Date.today}.csv" }
+    end
   end
 
   private
