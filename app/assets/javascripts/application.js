@@ -17,4 +17,6 @@
 //= require knockout.mapping
 //= require handlebars-v4.0.5
 //= require data/topics
+//= require conversation
+//= require home
 //= require_tree .

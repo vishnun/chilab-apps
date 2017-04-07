@@ -1,6 +1,6 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--2-col">
-    <button id="show-setup-dialog" type="button" data-bind="click: showSetupDialog"
+    <button id="show-setup-dialog" type="button" data-bind="click: function(){ showDialog('setup') }"
             class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored setup-btn">
       Setup
     </button>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="mdl-cell mdl-cell--3-col">
-    <button id="show-transcript"  data-bind="click: showTranscriptDialog"
+    <button id="show-transcript"  data-bind="click: function(){ showDialog('transcript') }"
             class="mdl-button mdl-js-button mdl-button--accent">
       Show Transcript
     </button>
