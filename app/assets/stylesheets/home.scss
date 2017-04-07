@@ -12,6 +12,11 @@
   top: 100px;
 }
 
+.mdl-dialog__actions {
+  display: block;
+  text-align: center;
+}
+
 .label-text {
   color: gray;
 }
@@ -45,4 +50,38 @@
 
 .mdl-snackbar__text {
   margin: auto;
+}
+
+.mdl-tabs__tab {
+  outline: none;
+}
+#conversation-panel {
+  padding: 20px;
+}
+
+.custom-text-field {
+  border: none;
+  border-bottom: 1px solid #670101;
+  font-size: 16px;
+  margin: 0;
+  padding: 5px;
+  color: black;
+  transition: border-bottom 2s;
+  transition-timing-function: cubic-bezier(.5, 0, .5, 1);
+  &:focus, &:active {
+    outline: none;
+    border-bottom: 1px solid steelblue;
+  }
+}
+
+.custom-select {
+  min-width: 80px;
+  border: 1px solid;
+  border-color: transparent transparent #5c0000 transparent;
+  background: white;
+  height: 3rem;
+  font-size: 15px;
+  box-shadow: none;
+  border-radius: 0;
+  outline: none;
 }

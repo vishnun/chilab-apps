@@ -12,12 +12,14 @@
 </div>
 <div class="mdl-cell mdl-cell--2-col">
   <div class="mdl-typography--headline mdl-typography--text-left" data-bind="visible: selectedUser"> <!-- Appears when you select something -->
-    <span class="label-text">I am:</span> <span data-bind="text: selectedUser() ? selectedUser().name : 'unknown' "></span>.
+    <span class="label-text">I am:</span>
+    <span data-bind="text: selectedUser() ? selectedUser().name : 'unknown' "></span>.
   </div>
 </div>
 <div class="mdl-cell mdl-cell--3-col">
   <div class="mdl-typography--headline mdl-typography--text-left" data-bind="visible: selectedTopic"> <!-- Appears when you select something -->
-    <span class="label-text">Topic:</span> <span data-bind="text: selectedTopic() ? selectedTopic().name : 'unknown' "></span>.
+    <span class="label-text">Topic:</span>
+    <span data-bind="text: selectedTopic() ? selectedTopic().name : 'unknown' "></span>.
   </div>
 </div>
 <div class="mdl-cell mdl-cell--3-col">
@@ -52,18 +54,18 @@
 
         <p>
           Timeout:
-          <input class="" type="number" id="timeout" data-bind="value: timeout"> secs
+          <input class="custom-text-field" type="number" id="timeout" data-bind="value: timeout"> secs
         </p>
 
         <p>
           Problem:
-          <%= select_tag 'problem', options_from_collection_for_select(@problems, 'url', 'name') %>
+          <%= select_tag 'problem', options_from_collection_for_select(@problems, 'url', 'name'), class: 'custom-select' %>
         </p>
         <p>
           Transcript:
           <%= select_tag 'transcript',
                          options_from_collection_for_select(@transcripts, 'id', 'name'),
-                         {'data-bind' => 'event: { change: updateUsers}'}
+                         {'data-bind' => 'event: { change: updateUsers}', class: 'custom-select'}
           %>
         </p>
         <p>
@@ -84,19 +86,31 @@
             <h4>New problem statement</h4>
             <%= form_for @problem, url: problems_path, html: {multipart: true} do |form| %>
                 <%= form.file_field :document %>
-                <%= submit_tag 'Submit' %>
+                <%= submit_tag 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
             <% end %>
           </div>
           <div class="mdl-cell mdl-cell--12-col">
+
             <h4>Setup Transcript</h4>
+
             <%= form_for @transcript, remote: true, url: transcripts_path, html: {multipart: true} do |f| %>
-                <%= f.label :name %>
-                <%= f.text_field :name %>
-                <%= f.label :user1 %>
-                <%= f.text_field :user1 %>
-                <%= f.label :user2 %>
-                <%= f.text_field :user2 %>
-                <%= submit_tag 'Submit' %>
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <%= f.label :name %>
+                    <%= f.text_field :name, class: 'custom-text-field' %>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <%= f.label :user1 %>
+                    <%= f.text_field :user1, class: 'custom-text-field' %>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <%= f.label :user2 %>
+                    <%= f.text_field :user2, class: 'custom-text-field' %>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <%= submit_tag 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
+                  </div>
+                </div>
             <% end %>
           </div>
         </div>
