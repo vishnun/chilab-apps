@@ -55,6 +55,7 @@
 .mdl-tabs__tab {
   outline: none;
 }
+
 #conversation-panel {
   padding: 20px;
 }
@@ -85,3 +86,30 @@
   border-radius: 0;
   outline: none;
 }
+
+.upload-container {
+  height: 30px;
+  $width: 83px;
+  .upload-btn {
+    position: absolute;
+    z-index: 5;
+    width: $width;
+    border: 1px solid steelblue;
+    text-align: center;
+    padding: 2px;
+    height: 20px;
+    border-radius: 5px;
+    background: steelblue;
+    color: white;
+    font-size: 12px;
+    pointer-events: none;
+    cursor: pointer;
+  }
+  .chooser {
+    font-size: 12px;
+    margin-top: 4px;
+    position: absolute;
+    left: $width;
+  }
+}
+

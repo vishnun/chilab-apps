@@ -84,9 +84,17 @@
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--12-col">
             <h4>New problem statement</h4>
-            <%= form_for @problem, url: problems_path, html: {multipart: true} do |form| %>
-                <%= form.file_field :document %>
-                <%= submit_tag 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
+            <%= form_for @problem, url: problems_path, html: {class: 'mdl-grid', multipart: true} do |form| %>
+
+                <div class="mdl-cell mdl-cell--6-col">
+                  <div class="upload-container">
+                    <span class="upload-btn">Choose file</span>
+                    <%= form.file_field :document, class: 'chooser' %>
+                  </div>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col">
+                  <%= submit_tag 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
+                </div>
             <% end %>
           </div>
           <div class="mdl-cell mdl-cell--12-col">
