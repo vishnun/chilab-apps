@@ -41,6 +41,10 @@ $(function () {
 
     }
 
+    var User = function (name) {
+        this.name = name;
+    };
+
     var SmartConversation = function () {
         var self = this;
 
@@ -66,10 +70,7 @@ $(function () {
         self.selectedLanguage = ko.observable(defaultLanguage);
 
         self.timeout = ko.observable(5);
-        self.transcript = ko.observableArray([]);
-
         self.conversation = ko.observable(getCoversation(self));
-
 
         self.finishSetup = function () {
             setupProblemDocument();
@@ -85,6 +86,29 @@ $(function () {
             snackbarContainer.MaterialSnackbar.showSnackbar(data);
         };
 
+        self.users = ko.observableArray([]);
+
+        self.updateUsers = function () {
+            var $transcriptEl = $('#transcript');
+            var selected = $transcriptEl.find('option:selected');
+            $.ajax({
+                url: "/transcript_users",
+                context: document.body,
+                data: {
+                    transcript: {
+                        id: selected.val()
+                    }
+                }
+            }).done(function (users) {
+                self.users([]);
+                users.forEach(function (userName) {
+                    self.users.push(new User(userName));
+                });
+            });
+        };
+
+        self.selectedUser = ko.observable();
+        self.updateUsers();
     };
 
     ko.applyBindings(new SmartConversation());

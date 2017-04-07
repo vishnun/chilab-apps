@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   root 'home#index', as: 'home'
 
   post 'problem' , to: 'problem#create', as: 'problems'
+  post 'transcript' , to: 'transcript#create', as: 'transcripts'
+
+  get 'transcript_users', to: 'transcript#users', as: 'transcript_users'
 end

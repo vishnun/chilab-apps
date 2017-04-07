@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="mdl-cell mdl-cell--3-col">
-    <button id="show-transcript"  data-bind="click: function(){ showDialog('transcript') }"
+    <button id="show-transcript" data-bind="click: function(){ showDialog('transcript') }"
             class="mdl-button mdl-js-button mdl-button--accent">
       Show Transcript
     </button>
@@ -27,7 +27,6 @@
 <dialog class="mdl-dialog" id="setup-dialog">
   <h4 class="mdl-dialog__title mdl-typography--text-center">Speech recognition setup</h4>
   <div class="mdl-dialog__content mdl-typography--text-left">
-
 
     <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
       <div class="mdl-tabs__tab-bar">
@@ -56,12 +55,47 @@
           Problem:
           <%= select_tag 'problem', options_from_collection_for_select(@problems, 'url', 'name') %>
         </p>
+        <p>
+          Transcript:
+          <%= select_tag 'transcript',
+                         options_from_collection_for_select(@transcripts, 'id', 'name'),
+                         {'data-bind' => 'event: { change: updateUsers}'}
+          %>
+        </p>
+        <p>
+
+          User:
+          <select class="custom-select"
+                  data-bind="options: users,
+                       optionsText: 'name',
+                       value: selectedUser,
+                       optionsCaption: 'Choose...'"></select>
+        </p>
       </div>
       <div class="mdl-tabs__panel" id="upload-panel">
-        <%= form_for @problem, url: problems_path, html: {multipart: true} do |form| %>
-            <%= form.file_field :document %>
-            <%= submit_tag 'Submit' %>
-        <% end %>
+
+
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--12-col">
+            <h4>New problem statement</h4>
+            <%= form_for @problem, url: problems_path, html: {multipart: true} do |form| %>
+                <%= form.file_field :document %>
+                <%= submit_tag 'Submit' %>
+            <% end %>
+          </div>
+          <div class="mdl-cell mdl-cell--12-col">
+            <h4>Setup Transcript</h4>
+            <%= form_for @transcript, remote: true, url: transcripts_path, html: {multipart: true} do |f| %>
+                <%= f.label :name %>
+                <%= f.text_field :name %>
+                <%= f.label :user1 %>
+                <%= f.text_field :user1 %>
+                <%= f.label :user2 %>
+                <%= f.text_field :user2 %>
+                <%= submit_tag 'Submit' %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 
