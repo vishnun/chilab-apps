@@ -44,11 +44,10 @@
         <p>
 
           Topic:
-          <select class="custom-select"
-                  data-bind="options: topics,
-                       optionsText: 'name',
-                       value: selectedTopic,
-                       optionsCaption: 'Choose...'"></select>
+          <%= select_tag 'selected_topic',
+                         options_from_collection_for_select(@topics, 'id', 'name'),
+                         {'data-bind' => 'event: { change: updateWords}', class: 'custom-select'}
+          %>
         </p>
 
 
@@ -97,7 +96,7 @@
                 </div>
             <% end %>
           </div>
-          <div class="mdl-cell mdl-cell--12-col">
+          <div class="mdl-cell mdl-cell--6-col">
 
             <h4>Setup Transcript</h4>
 
@@ -114,6 +113,26 @@
                   <div class="mdl-cell mdl-cell--12-col">
                     <%= f.label :user2 %>
                     <%= f.text_field :user2, class: 'custom-text-field' %>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <%= submit_tag 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col">
+
+            <h4>Setup Topics</h4>
+
+            <%= form_for @topic, remote: true, url: topic_index_path, html: {multipart: true} do |f| %>
+                <div class="mdl-grid">
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <%= f.label :name %>
+                    <%= f.text_field :name, class: 'custom-text-field' %>
+                  </div>
+                  <div class="mdl-cell mdl-cell--12-col">
+                    <%= f.label :words %>
+                    <%= f.text_area :words, class: 'custom-text-area', value: '' %>
                   </div>
                   <div class="mdl-cell mdl-cell--12-col">
                     <%= submit_tag 'Submit', class: 'mdl-button mdl-js-button mdl-button--raised mdl-button--colored' %>

@@ -89,9 +89,7 @@ $(function () {
             }
         };
 
-        self.topics = ko.observableArray([]);
-        setupTopics(self);
-        self.selectedTopic = ko.observable(self.topics()[1]);
+        self.selectedTopic = ko.observable({name: 'Topic', words: ['none']});
 
         var defaultLanguage = new Language('en-US');
         self.languages = ko.observableArray([defaultLanguage, new Language('en-GB'), new Language('en-IN'), new Language('en-CA'), new Language('en-AU'), new Language('en-NZ'), new Language('en-ZA')]);
@@ -134,7 +132,22 @@ $(function () {
         };
 
         self.users = ko.observableArray([]);
-        self.selectedUser = ko.observable();
+        self.selectedUser = ko.observable({name: '', words: []});
+
+        self.updateWords = function () {
+            var $selectedTopicEl = $('#selected_topic');
+            var selected = $selectedTopicEl.find('option:selected');
+            $.ajax({
+                url: "/topic/" + selected.val(),
+                context: document.body
+            }).done(function (topic) {
+                var wordDict = {};
+                topic.words.forEach(function (word) {
+                    wordDict[word] = true;
+                });
+                self.selectedTopic({name: topic.name, words: wordDict});
+            });
+        };
 
         self.updateUsers = function () {
             var $transcriptEl = $('#transcript');
@@ -159,6 +172,7 @@ $(function () {
 
 
         self.updateUsers();
+        self.updateWords();
     };
 
     ko.applyBindings(new SmartConversation());

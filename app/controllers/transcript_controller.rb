@@ -5,7 +5,7 @@ class TranscriptController < ApplicationController
     redirect_to home_path
   end
 
-  def add_dialogue
+  def create_dialogue
     Dialogue.create(dialogue_params)
   end
 

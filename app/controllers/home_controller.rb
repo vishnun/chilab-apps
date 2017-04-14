@@ -5,5 +5,8 @@ class HomeController < ApplicationController
 
     @transcript = Transcript.new
     @transcripts = Transcript.all
+
+    @topic = Topic.new
+    @topics = Topic.all
   end
 end
