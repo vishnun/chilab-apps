@@ -59,7 +59,7 @@ var getCoversation = function ($parent) {
         if (event.results[last].isFinal) {
             var resultingWords = matchWords(lastSentence);
             $parent.post_dialogue(lastSentence, resultingWords);
-            if (resultingWords) {
+            if (resultingWords.length > 0) {
                 $parent.showWord(resultingWords);
             }
         }
