@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  def index
+  def smart_conversation
     @problems = Problem.all
     @problem = Problem.new
 
@@ -8,5 +8,8 @@ class HomeController < ApplicationController
 
     @topic = Topic.new
     @topics = Topic.all
+  end
+
+  def index
   end
 end

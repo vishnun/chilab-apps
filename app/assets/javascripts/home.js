@@ -62,6 +62,11 @@ $(function () {
 
         var setupDialog = document.querySelector('dialog#setup-dialog');
         var transcriptDialog = document.querySelector('dialog#transcript-dialog');
+
+        if (!setupDialog || !transcriptDialog) {
+            return;
+        }
+
         setupDialogs([setupDialog, transcriptDialog]);
         self.dialogues = ko.observableArray([]);
         function showDialogues() {

@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require knockout
 //= require knockout.mapping
 //= require handlebars-v4.0.5

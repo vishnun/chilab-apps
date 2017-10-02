@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root 'home#index', as: 'home'
 
+  get 'smart_conversation', to: 'home#smart_conversation', as: 'smart_conversation'
+
   post 'problem', to: 'problem#create', as: 'problems'
 
   post 'transcript', to: 'transcript#create', as: 'transcripts'
